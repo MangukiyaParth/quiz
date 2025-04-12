@@ -10,6 +10,9 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any): Promise<boolea
             ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({
                 type: 'reward',
                 rewarded: true,
+                beforeReward: () => {
+                    console.log('Before reward ad is shown');
+                },
                 onRewardedSlotReady: () => {
                     console.log('Reward ad slot is ready');
                 },
@@ -26,6 +29,13 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any): Promise<boolea
                     console.error('Reward ad error:', error);
                     resolve(false);
                 },
+                adDismissed: () => {
+                    console.log('Ad dismissed');
+                    callbackfun(false);
+                },
+                adViewed: () => {
+                    console.log('Ad viewed');
+                }
             });
         } catch (error) {
             console.error('Error showing reward ad:', error);
