@@ -1,56 +1,71 @@
 'use client';
 
 import AdBanner from '@/components/AdBanner';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Questions from './ui/questions';
 import GetRewardModal from './ui/GetRewardModal';
 
 export default function Home() {
-
-
-	const [currentQuestion, setCurrentQuestion] = useState({
-        question: "White house is located in?",
-        options: ["UK", "USA", "Russia", "India"],
+	const [currentQuestion, setCurrentQuestion] = useState<{
+		question: string,
+		options: string[],
+		answer: number
+	}>({
+		question: "",
+		options: [],
 		answer: 0
-    });
-	const [userAnswers , setUserAnswers ] = useState<number[]>([]);
+	});
+	const [userCorrectAnswer , setCorrectUserAnswer ] = useState(0);
+	const [currentIndex , setCurrentIndex ] = useState(0);
 	const [selectedAnswer , setSelectedAnswer ] = useState<number | null>(null);
 	const [correctAnswer , setCorrectAnswer ] = useState<number | null>(null);
 	const [showRewardPopup , setShowRewardPopup ] = useState(false);
 
     const questions = [
         {
-            question: "White house is located in?",
-            options: ["UK", "USA", "Russia", "India"],
-			answer: 0
+            question: "Who is Brazil's top scorer in the FIFA World Cup?",
+            options: ["Pele", "Kaka", "Ronaldo Nazario", "Neymar"],
+			answer: 2
         },
         {
-            question: "Which planet is known as the Red Planet?",
-            options: ["Mars", "Venus", "Jupiter", "Saturn"],
-			answer: 2
+            question: "Hitler party which came into power in 1933 is known as?",
+            options: ["Labour Party", "Nazi Party", "Ku-Klux-Klan", "German Congress"],
+			answer: 1
         },
     ];
 
-    const handleAnswerClick = (index: number) => {
-        const currentIndex = questions.findIndex(q => q.question === currentQuestion.question);
-		setUserAnswers(prevAnswers => {
-			const newAnswers = [...prevAnswers];
-			newAnswers[currentIndex] = index;
-			setSelectedAnswer(index);
-			setCorrectAnswer(questions[currentIndex].answer);			
-			return newAnswers;
-		});
+	useEffect(() => {
+		setCurrentQuestion(questions[currentIndex]);
+	}, []);
+
+    const handleAnswerClick = async (index: number) => {
+		setSelectedAnswer(index);
+		setCorrectAnswer(questions[currentIndex].answer);
+
+		// Calculate the new value first
+		const isCorrect = index === questions[currentIndex].answer;
+		const newCorrectCount = isCorrect ? userCorrectAnswer + 1 : userCorrectAnswer;
+		
+		// Update state
+		setCorrectUserAnswer(newCorrectCount);
+
 		setTimeout(() => {
 			setSelectedAnswer(null);
 			setCorrectAnswer(null);
 			if(currentIndex === questions.length - 1) {
+				if (typeof window !== 'undefined') {
+					const coinData = { coins: newCorrectCount * 50 };
+					sessionStorage.setItem('_u', 'true');
+					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
+				}
 				setShowRewardPopup(true);
 				return;
 			}
-			const nextIndex = (currentIndex + 1) % questions.length;
+			const nextIndex = currentIndex + 1;
+			setCurrentIndex(nextIndex);
 			setCurrentQuestion(questions[nextIndex]);
-		}, 2000);
-    };
+		}, 1000);
+	};
 
 	return (
 		<div className="px-5 pt-[4rem] pb-20 flex flex-col items-center w-full gap-6">

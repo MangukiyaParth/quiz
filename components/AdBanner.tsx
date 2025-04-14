@@ -19,7 +19,7 @@ const AdBanner = ({adSlot, adFormat, adFullWidthResponse}: AdBannerProps) => {
   return (
     <ins
       className="adsbygoogle"
-      style={{ display: "block", width: "100%", height: "auto", minHeight: "280px" }}
+      style={{ display: "block", width: "100%", height: "auto", minHeight: "280px", minWidth: "300px" }}
       data-ad-client="ca-pub-1062876328695660"
       data-ad-slot={adSlot} // Replace with your ad slot ID
       data-ad-format={adFormat} // Replace with your ad format
