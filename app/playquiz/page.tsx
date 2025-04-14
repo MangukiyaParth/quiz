@@ -16,7 +16,7 @@ export default function Page() {
 						<div className="text-[8px] text-[#64d2ff] font-black sm:text-[10px]"> BrainBlitz</div>
 						<div className="flex gap-1 text-[14px] font-black sm:text-[18px]">
 							You have won 150
-							<img className="w-[20px] object-contain" src="./coin.svg" alt="Coin" /> 
+							<img className="w-[20px] object-contain" src="/coin.svg" alt="Coin" /> 
 						</div>
 					</div>
 				</div>

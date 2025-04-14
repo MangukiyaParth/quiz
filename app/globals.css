@@ -14,3 +14,13 @@ body {
 .scrollhide::-webkit-scrollbar {
   width: 0 !important;
 }
+
+.bg-bg {
+  background: var(--background);
+}
+
+.border-border {
+  --tw-border-opacity: 1;
+  border-color: #4b5563;
+  border-color: rgb(75 85 99 / 1);
+}

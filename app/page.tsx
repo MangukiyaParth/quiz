@@ -78,15 +78,15 @@ export default function Home() {
 				<div className="text-center font-bold text-18">
 					<div className="flex gap-1 text-[12px] text-[#8789c3]">
 						Answer few questions and win
-						<img className="w-3 object-contain" src="./coin.svg" alt="coins" />
+						<img className="w-3 object-contain" src="/coin.svg" alt="coins" />
 						150 free!
 					</div>
 				</div>
 				<div className="cursor-pointer">
-					<img className="w-[55px]" src="./bell.gif" />
+					<img className="w-[55px]" src="/bell.gif" />
 				</div>
 				
-				<Questions currentQuestion={currentQuestion} handleAnswerClick={handleAnswerClick} selectedAnswer={selectedAnswer} correctAnswer={correctAnswer} />
+				<Questions isHomepage={true} currentQuestion={currentQuestion} handleAnswerClick={handleAnswerClick} selectedAnswer={selectedAnswer} correctAnswer={correctAnswer} />
 				<div className="text-[#ffcc5b] font-bold cursor-pointer flex"><p>Sign-Up </p><p className="pl-[6px]">or Login</p></div>
 				<div className="w-full pl-5">
 					<div className="w-full font-bold text-lg">Play Quiz and Win Coins!</div>

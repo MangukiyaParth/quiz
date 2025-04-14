@@ -27,7 +27,7 @@ export default function GetRewardModal() {
 						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
-				<img src="./getreward.gif" alt="reward logo" loading="lazy" />
+				<img src="/getreward.gif" alt="reward logo" loading="lazy" />
 				<h2 className="text-2xl mb-4 text-[#D8E91E]">New Reward Available</h2>
 				<h2 className="text-[1.5rem] md:text-4xl mb-4">Get Instant 100 Coins!</h2>
 				<p className="mb-6 text-[#8E8F98]">Watch a simple ad and get rewarded</p>

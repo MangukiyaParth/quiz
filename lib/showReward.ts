@@ -17,7 +17,14 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any): Promise<boolea
                     console.log('Reward ad slot is ready');
                 },
                 onRewardedSlotGranted: () => {
-                    console.log('Reward granted', rewardCoins);
+                    const storedCoinData = sessionStorage.getItem('localCoins');
+                    const coinData = storedCoinData ? JSON.parse(storedCoinData) : null;
+                    const coins = coinData ? coinData.coins : 0;
+                    
+                    const newCoins = coins + rewardCoins;
+                    sessionStorage.setItem('localCoins', JSON.stringify({ coins: newCoins }));
+
+                    // console.log('Reward granted', rewardCoins);
                     resolve(true);
                 },
                 onRewardedSlotClosed: () => {
