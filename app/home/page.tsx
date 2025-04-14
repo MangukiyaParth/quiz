@@ -4,10 +4,9 @@ import BottomNavigation from '@/components/BottomNavigation';
 import { category } from '@/lib/category';
 import { quiz } from '@/lib/quiz';
 import { useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import QuizItem from '../ui/QuizItem';
 
 export default function Page() {
-	const router = useRouter();
 
 	const [currentCategory, setCurrentCategory] = useState(0);
 	const sliderRef = useRef<HTMLDivElement>(null);
@@ -59,27 +58,7 @@ export default function Page() {
 			{filteredQuizData.map((quiz) => {
 				const cat_data = categories.find((cat) => cat.id === quiz.cat_id) || categories[0];
 				return (
-					<div className="w-full" key={quiz.id} onClick={() => router.push('quiz/'+encodeURI(quiz.name.replaceAll(" ","_")))} >
-						<div className="flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer">
-							<div className="flex gap-2 items-center px-2 justify-between">
-								<div className="flex flex-col"><img className="object-cover w-24 rounded-full" src={cat_data.img} alt="CategoryImage" /></div>
-								<div className="flex flex-col w-full justify-start">
-									<div className="flex text-[8px] text-text_hd font-black sm:text-[10px] flex-col items-end">
-										<div className="text-[#64d2ff] max-h-[20px] py-[2px]">
-											<div className="flex sm:justify-center">{cat_data.name} &nbsp;| &nbsp;{quiz.name}</div>
-										</div>
-									</div>
-									<div className="flex items-end flex-col mt-[5px]">
-										<div className="text-[10px] sm:text-[14px] font-black flex">Play &amp; Win&nbsp;&nbsp;<img className="w-[20px] object-contain" src="/coin.svg" alt="Coins" />&nbsp;10000</div>
-									</div>
-									<div className="flex items-end flex-col mt-[5px]">
-										<span className="text-[8px] flex gap-1 sm:text-[10px] bg-[#30d158]/20 text-[#30d158] px-2 rounded-full">Entry Fee &nbsp;<img className="w-[14px] object-contain" src="https://playerstorage.b-cdn.net/quiztwiz/assets/coin.svg" alt="Fee" />&nbsp;100</span>
-									</div>
-								</div>
-								<div className="flex flex-col"><img src="/play.svg" alt="Play" className="rounded-full object-cover w-24" /></div>
-							</div>
-						</div>
-					</div>
+					<QuizItem quizData={quiz} catData={cat_data} key={quiz.id} />
 				)}
 			)}
 			<BottomNavigation activePage='home' />
