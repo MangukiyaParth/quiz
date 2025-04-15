@@ -49,7 +49,7 @@ export default function Page({params} : PageProps) {
 
 		// Calculate the new value first
 		const isCorrect = index === questions[currentIndex].answer;
-		const newCorrectCount = isCorrect ? userCorrectAnswer + 1 : userCorrectAnswer;
+		const newCorrectCount = isCorrect ? userCorrectAnswer + 50 : userCorrectAnswer-25;
 		
 		// Update state
 		setCorrectUserAnswer(newCorrectCount);
@@ -59,9 +59,15 @@ export default function Page({params} : PageProps) {
 			setCorrectAnswer(null);
 			if(currentIndex === questions.length - 1) {
 				if (typeof window !== 'undefined') {
-					const coinData = { coins: newCorrectCount * 50 };
-					sessionStorage.setItem('_u', 'true');
+					const storedCoinData = sessionStorage.getItem('localCoins');
+					const oldCoinData = storedCoinData ? JSON.parse(storedCoinData) : null;
+					const oldCoins = oldCoinData ? oldCoinData.coins : 0;
+
+					const coinData = { coins: (Math.round(newCorrectCount * 6.6666)) + oldCoins };
 					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
+					sessionStorage.setItem('_p', JSON.stringify({a:newCorrectCount}));
+
+					router.push('/result');
 				}
 				// setShowRewardPopup(true);
 				return;
@@ -83,7 +89,18 @@ export default function Page({params} : PageProps) {
 
 	useEffect(() => {
 		if(progress >= 120) {
-			router.push('/home');
+			if (typeof window !== 'undefined') {
+				const storedCoinData = sessionStorage.getItem('localCoins');
+				const oldCoinData = storedCoinData ? JSON.parse(storedCoinData) : null;
+				const oldCoins = oldCoinData ? oldCoinData.coins : 0;
+
+				const coinData = { coins: (Math.round(userCorrectAnswer * 6.6666)) + oldCoins };
+				sessionStorage.setItem('localCoins', JSON.stringify(coinData));
+				sessionStorage.setItem('_p', JSON.stringify({a:userCorrectAnswer}));
+
+				router.push('/result');
+			}
+			// router.push('/home');
 		}
 	}, [progress]);
 	
@@ -100,7 +117,7 @@ export default function Page({params} : PageProps) {
 				</div>
 				
 				<Questions isHomepage={false} currentQuestion={currentQuestion} handleAnswerClick={handleAnswerClick} selectedAnswer={selectedAnswer} correctAnswer={correctAnswer} />
-				<div className="flex justify-center items-center gap-1 text-lg font-bold">Your Score : <span className="text-amber-400"> 0 </span></div>
+				<div className="flex justify-center items-center gap-1 text-lg font-bold">Your Score : <span className="text-amber-400"> {userCorrectAnswer} </span></div>
 				
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
 					<AdBanner adFormat='auto' adSlot='3051008040' adFullWidthResponse={true} />

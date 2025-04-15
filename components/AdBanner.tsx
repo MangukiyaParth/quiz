@@ -8,14 +8,22 @@ type AdBannerProps = {
 }
 
 const AdBanner = ({adSlot, adFormat, adFullWidthResponse}: AdBannerProps) => {
-    useEffect(() => {
-        try {
-          (window as any).adsbygoogle = ((window as any).adsbygoogle || []).push({});
-        }
-        catch (e) {
-            console.error("AdSense error: ", e);
-        }
-    }, []);
+  useEffect(() => {
+    // try {
+    //   (window as any).adsbygoogle = ((window as any).adsbygoogle || []).push({});
+    // }
+    // catch (e) {
+    //   console.error("AdSense error: ", e);
+    // }
+
+    if ((window as any).adsbygoogle && typeof (window as any).adsbygoogle.push === 'function') {
+      try {
+          (window as any).adsbygoogle.push({});
+      } catch (e) {
+          console.error("AdSense error: ", e);
+      }
+    }
+  }, []);
   return (
     <ins
       className="adsbygoogle"
