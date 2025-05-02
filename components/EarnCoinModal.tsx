@@ -7,12 +7,12 @@ const EarnCoinModal = ({modalManageFunction, quizId}: {modalManageFunction: (val
   const router = useRouter();
   const manageWatchBtn = () => {
     showRewardAd(100, (result: any) => {
-      if (result) {
-        router.push('/quiz-play/' + quizId);
-      }
-      else {
-        console.log('Reward not granted!');
-      }
+      router.push('/quiz-play/' + quizId);
+      // if (result) {
+      // }
+      // else {
+      //   console.log('Reward not granted!');
+      // }
     });
   };
   return (

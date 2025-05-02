@@ -9,13 +9,13 @@ export default function GetRewardModal() {
 	};
 	const claimCoin = async () => {
 		showRewardAd(100, (result: any) => {
-			if (result) {
-				console.log('Reward granted!');
-				moveToNextPage();
-			}
-			else {
-				console.log('Reward not granted!');
-			}
+			moveToNextPage();
+			// if (result) {
+			// 	console.log('Reward granted!');
+			// }
+			// else {
+			// 	console.log('Reward not granted!');
+			// }
 		});
 	};
 	return (
