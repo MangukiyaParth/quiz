@@ -16,7 +16,7 @@ export default function Page() {
 	return (
 		<div className="px-5 pt-[4rem] pb-20 flex flex-col items-center w-full gap-6">
 			<div className="max-w-[480px] max-h-[320px] mobile-width">
-				<AdBanner adFormat='auto' adSlot='3051008040' adFullWidthResponse={true} />
+				<AdBanner slot_id="div-gpt-ad-123456789-1" size={[[300, 250]]} id="/23178317433/kaku_display_01" />
 			</div>
 			<div className="text-lg font-bold text-center"> Select the Quiz category that you want to play </div>
 			<div className="border-2 border-white rounded-full px-4 py-3 flex gap-2 w-full">

@@ -14,7 +14,8 @@ export default function Page({params} : PageProps) {
 	const router = useRouter();
 	
 	const { id } = use(params);
-	const filteredQuizData = id === '' ? { id: 0, name: "", cat_id: 0 } : quiz.find(q => md5(q.id.toString()) === id);
+	const quizItem = id === '' ? { id: 0, name: "", cat_id: 0, questions: [] } : quiz.find(q => md5(q.id.toString()) === id);
+	const questions = quizItem?.questions.sort(() => Math.random() - .5).slice(0, 15) || [];
 	const [currentQuestion, setCurrentQuestion] = useState<{
 		question: string,
 		options: string[],
@@ -29,18 +30,18 @@ export default function Page({params} : PageProps) {
 	const [selectedAnswer , setSelectedAnswer ] = useState<number | null>(null);
 	const [correctAnswer , setCorrectAnswer ] = useState<number | null>(null);
 	
-	const questions = [
-        {
-            question: "Who is Brazil's top scorer in the FIFA World Cup?",
-            options: ["Pele", "Kaka", "Ronaldo Nazario", "Neymar"],
-			answer: 2
-        },
-        {
-            question: "Hitler party which came into power in 1933 is known as?",
-            options: ["Labour Party", "Nazi Party", "Ku-Klux-Klan", "German Congress"],
-			answer: 1
-        },
-    ];
+	// const questions = [
+    //     {
+    //         question: "Who is Brazil's top scorer in the FIFA World Cup?",
+    //         options: ["Pele", "Kaka", "Ronaldo Nazario", "Neymar"],
+	// 		answer: 2
+    //     },
+    //     {
+    //         question: "Hitler party which came into power in 1933 is known as?",
+    //         options: ["Labour Party", "Nazi Party", "Ku-Klux-Klan", "German Congress"],
+	// 		answer: 1
+    //     },
+    // ];
 
 	useEffect(() => {
 		setCurrentQuestion(questions[currentIndex]);
@@ -65,8 +66,8 @@ export default function Page({params} : PageProps) {
 					const storedCoinData = sessionStorage.getItem('localCoins');
 					const oldCoinData = storedCoinData ? JSON.parse(storedCoinData) : null;
 					const oldCoins = oldCoinData ? oldCoinData.coins : 0;
-
-					const coinData = { coins: (Math.round(newCorrectCount * 6.6666)) + oldCoins };
+					
+					const coinData = { coins: (newCorrectCount < 0 ? 50 : (Math.round(newCorrectCount * 6.6666))) + oldCoins };
 					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
 					sessionStorage.setItem('_p', JSON.stringify({a:newCorrectCount}));
 
@@ -97,7 +98,7 @@ export default function Page({params} : PageProps) {
 				const oldCoinData = storedCoinData ? JSON.parse(storedCoinData) : null;
 				const oldCoins = oldCoinData ? oldCoinData.coins : 0;
 
-				const coinData = { coins: (Math.round(userCorrectAnswer * 6.6666)) + oldCoins };
+				const coinData = { coins: (userCorrectAnswer < 0 ? 50 : (Math.round(userCorrectAnswer * 6.6666))) + oldCoins };
 				sessionStorage.setItem('localCoins', JSON.stringify(coinData));
 				sessionStorage.setItem('_p', JSON.stringify({a:userCorrectAnswer}));
 
@@ -123,7 +124,7 @@ export default function Page({params} : PageProps) {
 				<div className="flex justify-center items-center gap-1 text-lg font-bold">Your Score : <span className="text-amber-400"> {userCorrectAnswer} </span></div>
 				
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
-					<AdBanner adFormat='auto' adSlot='3051008040' adFullWidthResponse={true} />
+					<AdBanner slot_id="div-gpt-ad-123456789-7" size={[[300, 250]]} id="/23178317433/kaku_display_01" />
 				</div>
 
 				<div className="hidden mt-4 bg-bg_nav min-h-[70px] bottom-[-3rem] fixed left-0 min-w-[520px] max-w-[520px] lgm:min-w-[360px] md:w-full md:min-w-full">

@@ -73,7 +73,7 @@ export default function Home() {
 			{ !showRewardPopup && 
 				<>
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
-					<AdBanner adFormat='auto' adSlot='3051008040' adFullWidthResponse={true} />
+					<AdBanner slot_id="div-gpt-ad-123456789-0" size={[[300, 250]]} id="/23178317433/kaku_display_01" />
 				</div>
 				<div className="text-center font-bold text-18">
 					<div className="flex gap-1 text-[12px] text-[#8789c3]">

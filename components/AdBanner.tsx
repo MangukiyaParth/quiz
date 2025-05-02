@@ -2,40 +2,30 @@
 import React, { use, useEffect } from 'react';
 
 type AdBannerProps = {
-    adFormat: string,
-    adSlot: string,
-    adFullWidthResponse: boolean
+    id: string,
+    slot_id: string,
+    size: any
 }
 
-const AdBanner = ({adSlot, adFormat, adFullWidthResponse}: AdBannerProps) => {
-  useEffect(() => {
-    // try {
-    //   (window as any).adsbygoogle = ((window as any).adsbygoogle || []).push({});
-    // }
-    // catch (e) {
-    //   console.error("AdSense error: ", e);
-    // }
+const AdBanner = ({id, slot_id, size}: AdBannerProps) => {
+	useEffect(() => {
+		(window as any).googletag = (window as any).googletag || { cmd: [] };
+        const googletag = (window as any).googletag;
 
-    if ((window as any).adsbygoogle && typeof (window as any).adsbygoogle.push === 'function') {
-      try {
-          (window as any).adsbygoogle.push({});
-      } catch (e) {
-          console.error("AdSense error: ", e);
-      }
-    }
-  }, []);
-  return (
-    <ins
-      className="adsbygoogle"
-      style={{ display: "block", width: "100%", height: "auto", minHeight: "280px", minWidth: "300px" }}
-      data-ad-client="ca-pub-1062876328695660"
-      data-ad-slot={adSlot} // Replace with your ad slot ID
-      data-ad-format={adFormat} // Replace with your ad format
-      data-full-width-responsive={adFullWidthResponse ? "true" : "false"} // Set to true or false based on your requirement
-    >
-
-    </ins>
-  )
+		googletag.cmd.push(function() {
+			if (googletag.pubads().getSlots().some((slot: { getSlotElementId: () => string; }) => slot.getSlotElementId() === id)) {
+				const oldSlot = googletag.pubads().getSlots().find((slot: any) => slot.getSlotElementId() === id);
+				googletag.destroySlots([oldSlot]);
+			}
+            googletag.defineSlot(id, size, slot_id).addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+            googletag.display(slot_id);
+        });
+	}, []);
+	return (
+		<div id={slot_id} style={{ minWidth: '250px', minHeight: '250px', width: 'fit-content', display: 'flex', justifyContent: 'center' }} />
+	)
 }
 
 export default AdBanner
