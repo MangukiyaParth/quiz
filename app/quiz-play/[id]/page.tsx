@@ -1,6 +1,8 @@
 "use client";
 import Questions from '@/app/ui/questions';
 import AdBanner from '@/components/AdBanner';
+import { quiz } from '@/lib/quiz';
+import md5 from 'md5';
 import { useRouter } from 'next/navigation';
 import { use, useEffect, useState } from 'react';
 
@@ -12,6 +14,7 @@ export default function Page({params} : PageProps) {
 	const router = useRouter();
 	
 	const { id } = use(params);
+	const filteredQuizData = id === '' ? { id: 0, name: "", cat_id: 0 } : quiz.find(q => md5(q.id.toString()) === id);
 	const [currentQuestion, setCurrentQuestion] = useState<{
 		question: string,
 		options: string[],

@@ -1,3 +1,10 @@
+declare global {
+    interface Window {
+        googletag: any;
+        adsbygoogle: any[];
+    }
+}
+
 export const showRewardAd = (rewardCoins: any, callbackfun: any): Promise<boolean> => {
     return new Promise((resolve) => {
         if (typeof window === 'undefined' || !(window as any).adsbygoogle) {
@@ -7,42 +14,28 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any): Promise<boolea
         }
 
         try {
-            ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({
-                type: 'reward',
-                rewarded: true,
-                beforeReward: () => {
-                    console.log('Before reward ad is shown');
-                },
-                onRewardedSlotReady: () => {
-                    console.log('Reward ad slot is ready');
-                },
-                onRewardedSlotGranted: () => {
-                    const storedCoinData = sessionStorage.getItem('localCoins');
-                    const coinData = storedCoinData ? JSON.parse(storedCoinData) : null;
-                    const coins = coinData ? coinData.coins : 0;
-                    
-                    const newCoins = coins + rewardCoins;
-                    sessionStorage.setItem('localCoins', JSON.stringify({ coins: newCoins }));
-
-                    // console.log('Reward granted', rewardCoins);
-                    resolve(true);
-                },
-                onRewardedSlotClosed: () => {
-                    console.log('Reward ad closed without reward');
-                    callbackfun(true);
-                    resolve(false);
-                },
-                onRewardedSlotError: (error: any) => {
-                    console.error('Reward ad error:', error);
-                    resolve(false);
-                },
-                adDismissed: () => {
-                    console.log('Ad dismissed');
-                    callbackfun(false);
-                },
-                adViewed: () => {
-                    console.log('Ad viewed');
+            window.googletag.cmd.push(function () {
+                try {
+                    const rewardedSlot = window.googletag.defineOutOfPageSlot('/23178317433/kaku_reward', window.googletag.enums.OutOfPageFormat.REWARDED).addService(window.googletag.pubads());
+                    window.googletag.enableServices();
+                    window.googletag.display(rewardedSlot);
+                    window.googletag.pubads().addEventListener("rewardedSlotReady", function (evt: any) {
+                        evt.makeRewardedVisible();
+                    });
+                    window.googletag.pubads().addEventListener("rewardedSlotClosed", function () {
+                        window.googletag.destroySlots([rewardedSlot]);
+                        const storedCoinData = sessionStorage.getItem('localCoins');
+                        const coinData = storedCoinData ? JSON.parse(storedCoinData) : null;
+                        const coins = coinData ? coinData.coins : 0;
+                        
+                        const newCoins = coins + rewardCoins;
+                        sessionStorage.setItem('localCoins', JSON.stringify({ coins: newCoins }));
+                        resolve(true);
+                    });
+                } catch (error) {
+                    console.error("Error during ad setup:", error);
                 }
+    
             });
         } catch (error) {
             console.error('Error showing reward ad:', error);
