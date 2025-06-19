@@ -10,7 +10,7 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any) => {
     try {
         googletag.cmd.push(function () {
             try {
-                const rewardedSlot = googletag.defineOutOfPageSlot('/22639388115/rewarded_web_example', googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
+                const rewardedSlot = googletag.defineOutOfPageSlot('/23302694015/QOOP-1', googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
                 googletag.enableServices();
                 googletag.display(rewardedSlot);
                 googletag.pubads().addEventListener("rewardedSlotReady", function (evt: any) {
@@ -25,7 +25,7 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any) => {
                     const newCoins = coins + rewardCoins;
                     sessionStorage.setItem('localCoins', JSON.stringify({ coins: newCoins }));
                     window.dispatchEvent(new Event('session-change'));
-
+                    
                     if(callbackfun){
                         callbackfun();
                     }
