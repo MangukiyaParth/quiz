@@ -70,6 +70,7 @@ export default function Page({params} : PageProps) {
 					const coinData = { coins: (newCorrectCount < 0 ? 50 : (Math.round(newCorrectCount * 6.6666))) + oldCoins };
 					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
 					sessionStorage.setItem('_p', JSON.stringify({a:newCorrectCount}));
+					window.dispatchEvent(new Event('session-change'));
 
 					router.push('/result');
 				}
@@ -101,6 +102,7 @@ export default function Page({params} : PageProps) {
 				const coinData = { coins: (userCorrectAnswer < 0 ? 50 : (Math.round(userCorrectAnswer * 6.6666))) + oldCoins };
 				sessionStorage.setItem('localCoins', JSON.stringify(coinData));
 				sessionStorage.setItem('_p', JSON.stringify({a:userCorrectAnswer}));
+				window.dispatchEvent(new Event('session-change'));
 
 				router.push('/result');
 			}

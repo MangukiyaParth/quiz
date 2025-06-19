@@ -29,6 +29,7 @@ export default function Page() {
 
 		const coinData = { coins: resultCoin + oldCoins };
 		sessionStorage.setItem('localCoins', JSON.stringify(coinData));
+		window.dispatchEvent(new Event('session-change'));
 	};
 	return (
 		<div className="px-5 pt-[4rem] pb-20 flex flex-col items-center w-full gap-6">

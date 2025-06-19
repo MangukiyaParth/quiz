@@ -60,6 +60,7 @@ export default function Home() {
 					const coinData = { coins: newCorrectCount * 50 };
 					sessionStorage.setItem('_u', 'true');
 					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
+					window.dispatchEvent(new Event('session-change'));
 				}
 				showRewardAd(0, (result: any) => {});
 				setShowRewardPopup(true);

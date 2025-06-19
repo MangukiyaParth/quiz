@@ -9,20 +9,32 @@ export default function GeneralLayout({ children, title }: { children: React.Rea
 	const pathname = usePathname();
 	const [coins, setCoins] = useState(0);
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			const storedCoinData = sessionStorage.getItem('localCoins');
-			const coinData = storedCoinData ? JSON.parse(storedCoinData) : null;
-			setCoins(coinData ? coinData.coins : 0);
+		const handleStorageChange = () => {
+			if (typeof window !== 'undefined') {
+				const storedCoinData = sessionStorage.getItem('localCoins');
+				const coinData = storedCoinData ? JSON.parse(storedCoinData) : null;
+				setCoins(coinData ? coinData.coins : 0);
 
-			const storedData = sessionStorage.getItem('_u');
-			if(storedData == undefined && pathname != '/' && pathname != '/playquiz') {
-				router.push('/');
-			}
-			else if (storedData == 'true' && pathname == '/') {
-				router.push('/home');
+				const storedData = sessionStorage.getItem('_u');
+				if(storedData == undefined && pathname != '/' && pathname != '/playquiz') {
+					router.push('/');
+				}
+				else if (storedData == 'true' && pathname == '/') {
+					router.push('/home');
+				}
 			}
 		}
-	}, []);
+
+		// Initial run
+		handleStorageChange();
+
+		// Listen for custom event
+		window.addEventListener('session-change', handleStorageChange);
+
+		return () => {
+			window.removeEventListener('session-change', handleStorageChange);
+		};
+	}, [pathname, router]);
 
 	const manageDailyRewardBtn = () => {
 		showRewardAd(100, (result: any) => {});
