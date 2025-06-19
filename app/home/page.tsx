@@ -3,14 +3,19 @@ import AdBanner from '@/components/AdBanner';
 import BottomNavigation from '@/components/BottomNavigation';
 import { category } from '@/lib/category';
 import { quiz } from '@/lib/quiz';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import QuizItem from '../ui/QuizItem';
 
 export default function Page() {
 
 	const [currentCategory, setCurrentCategory] = useState(0);
 	const sliderRef = useRef<HTMLDivElement>(null);
-	const quizData = quiz.sort(function(){return 0.5 - Math.random()});
+	// const quizData = quiz.sort(function(){return 0.5 - Math.random()});
+	const [quizData, setQuizData] = useState(quiz);
+
+	useEffect(() => {
+		setQuizData([...quiz].sort(() => 0.5 - Math.random()));
+	}, []);
 
 	// Categories data
 	const categories = category;

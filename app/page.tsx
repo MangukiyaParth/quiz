@@ -60,7 +60,6 @@ export default function Home() {
 					const coinData = { coins: newCorrectCount * 50 };
 					sessionStorage.setItem('_u', 'true');
 					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
-					window.dispatchEvent(new Event('session-change'));
 				}
 				showRewardAd(0, (result: any) => {});
 				setShowRewardPopup(true);
@@ -76,7 +75,6 @@ export default function Home() {
 		<div className="px-5 pt-[4rem] pb-20 flex flex-col items-center w-full gap-6">
 			{ showDisplayPopup && <DisplayAdModal setPopup={setShowDisplayPopup} /> }
 			{ showRewardPopup && <GetRewardModal /> }
-			{ !showRewardPopup && !showDisplayPopup &&
 				<>
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
 					<AdBanner slot_id="div-gpt-ad-123456789-0" size={[[300, 250]]} id="/23302694015/QD1" />
@@ -112,7 +110,6 @@ export default function Home() {
 					<button className="w-[40%] md:w-[40%] lg:w-[30%] xl:w-[30%] 2xl:w-[30%] big:w-[30%] bg-blue-500 hover:bg-blue-700 text-white font-medium text-md py-2 px-4 rounded-full">Contact Us</button>
 				</div>
 				</>
-			}
 		</div>
 	);
 }
