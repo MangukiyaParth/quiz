@@ -9,7 +9,7 @@ interface QuizItemProps {
 export default function QuizItem({quizData, catData}: QuizItemProps) {
     const router = useRouter();
     return (
-        <div className="w-full" key={quizData.id} onClick={() => router.push('quiz/'+encodeURI(quizData.name.replaceAll(" ","_")))} >
+        <div className="w-full" key={quizData.id} onClick={() => router.push('/quiz/'+encodeURI(quizData.name.replaceAll(" ","_")))} >
             <div className="flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer">
                 <div className="flex gap-2 items-center px-2 justify-between">
                     <div className="flex flex-col"><img className="object-cover w-24 rounded-full" src={catData.img} alt="CategoryImage" /></div>

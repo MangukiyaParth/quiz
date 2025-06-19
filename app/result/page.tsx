@@ -33,7 +33,7 @@ export default function Page() {
 	return (
 		<div className="px-5 pt-[4rem] pb-20 flex flex-col items-center w-full gap-6">
 			<div className="max-w-[480px] max-h-[320px] mobile-width">
-				<AdBanner slot_id="div-gpt-ad-123456789-8" size={[[300, 250]]} id="/23178317433/kaku_display_01" />
+				<AdBanner slot_id="div-gpt-ad-123456789-8" size={[[300, 250]]} id="/23302694015/QD8" />
 			</div>
 			<div className="flex justify-center items-center" style={{ position: "relative", width: "200px" }}>
 				<img src="/animation.gif" alt="logo" style={{ height: "200px", position: "absolute", top: "-10px" }} />

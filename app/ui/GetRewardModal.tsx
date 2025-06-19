@@ -5,7 +5,8 @@ import { showRewardAd } from '@/lib/showReward';
 export default function GetRewardModal() {
 	const router = useRouter();
 	const moveToNextPage = () => {
-		router.push('/playquiz');
+		// router.push('/playquiz');
+		router.push('/home');
 	};
 	const claimCoin = async () => {
 		showRewardAd(100, (result: any) => {

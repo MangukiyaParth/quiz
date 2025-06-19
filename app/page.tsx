@@ -4,6 +4,7 @@ import AdBanner from '@/components/AdBanner';
 import React, { useEffect, useState } from 'react';
 import Questions from './ui/questions';
 import GetRewardModal from './ui/GetRewardModal';
+import { showRewardAd } from '@/lib/showReward';
 
 export default function Home() {
 	const [currentQuestion, setCurrentQuestion] = useState<{
@@ -58,6 +59,8 @@ export default function Home() {
 					sessionStorage.setItem('_u', 'true');
 					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
 				}
+				showRewardAd(0, (result: any) => {
+				});
 				setShowRewardPopup(true);
 				return;
 			}
@@ -73,7 +76,7 @@ export default function Home() {
 			{ !showRewardPopup && 
 				<>
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
-					<AdBanner slot_id="div-gpt-ad-123456789-0" size={[[300, 250]]} id="/23178317433/kaku_display_01" />
+					<AdBanner slot_id="div-gpt-ad-123456789-0" size={[[300, 250]]} id="/23302694015/QD1" />
 				</div>
 				<div className="text-center font-bold text-18">
 					<div className="flex gap-1 text-[12px] text-[#8789c3]">

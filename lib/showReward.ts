@@ -10,7 +10,7 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any) => {
     try {
         googletag.cmd.push(function () {
             try {
-                const rewardedSlot = googletag.defineOutOfPageSlot('/23178317433/kaku_reward', googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
+                const rewardedSlot = googletag.defineOutOfPageSlot('/23302694015/QOOP-1', googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
                 googletag.enableServices();
                 googletag.display(rewardedSlot);
                 googletag.pubads().addEventListener("rewardedSlotReady", function (evt: any) {

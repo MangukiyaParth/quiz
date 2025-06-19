@@ -40,7 +40,7 @@ export default function Page({params} : PageProps) {
 			{ !showEarnModal && 
 				<>
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
-					<AdBanner slot_id="div-gpt-ad-123456789-6" size={[[300, 250]]} id="/23178317433/kaku_display_01" />
+					<AdBanner slot_id="div-gpt-ad-123456789-6" size={[[300, 250]]} id="/23302694015/QD6" />
 				</div>
 				<div className="flex flex-col gap-6 md:gap-2 bg-bg border-2 border-border rounded-[30px] px-[10px] py-5">
 					<div className="flex gap-2 items-center px-5 ">

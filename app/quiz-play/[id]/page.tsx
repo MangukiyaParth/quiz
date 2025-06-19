@@ -124,7 +124,7 @@ export default function Page({params} : PageProps) {
 				<div className="flex justify-center items-center gap-1 text-lg font-bold">Your Score : <span className="text-amber-400"> {userCorrectAnswer} </span></div>
 				
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
-					<AdBanner slot_id="div-gpt-ad-123456789-7" size={[[300, 250]]} id="/23178317433/kaku_display_01" />
+					<AdBanner slot_id="div-gpt-ad-123456789-7" size={[[300, 250]]} id="/23302694015/QD7" />
 				</div>
 
 				<div className="hidden mt-4 bg-bg_nav min-h-[70px] bottom-[-3rem] fixed left-0 min-w-[520px] max-w-[520px] lgm:min-w-[360px] md:w-full md:min-w-full">

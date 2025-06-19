@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GeneralLayout from "./ui/general-layout";
 import Script from "next/script";
+import GoogleAds from "@/lib/GoogleAds";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <GoogleAds />
         <GeneralLayout children={children} title="Home"></GeneralLayout>
       </body>
     </html>

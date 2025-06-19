@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { showRewardAd } from '@/lib/showReward';
 
 export default function GeneralLayout({ children, title }: { children: React.ReactNode, title: string }) {
 	const router = useRouter();
@@ -22,6 +23,11 @@ export default function GeneralLayout({ children, title }: { children: React.Rea
 			}
 		}
 	}, []);
+
+	const manageDailyRewardBtn = () => {
+		showRewardAd(100, (result: any) => {
+		});
+	  };
 	return (
 		<div className="text-white h-screen flex overflow-hidden">
 			<div className="min-w-full max-w-[520px] lgm:min-w-[360px] lgm:max-w-[360px] w-full md:w-auto md:min-w-[520px] max-h-screen flex flex-col gap-3 items-center overflow-y-auto scrollhide box-border bg-bg">
@@ -33,7 +39,7 @@ export default function GeneralLayout({ children, title }: { children: React.Rea
 					{
 						pathname != '/' &&
 						<div className="flex items-center text-[12px]">
-							<div className="flex text-center gap-1 items-center  rounded-full px-2  cursor-pointer">
+							<div className="flex text-center gap-1 items-center  rounded-full px-2  cursor-pointer" onClick={manageDailyRewardBtn}>
 								<div className="flex item-center mb-2"><img className="w-[25px] object-contain" src="/reward.gif" alt="animation" /></div>
 								<div className="flex items-center text-white">Daily Reward</div>
 							</div>
