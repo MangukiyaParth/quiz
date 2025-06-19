@@ -11,12 +11,6 @@ export default function GetRewardModal() {
 	const claimCoin = async () => {
 		showRewardAd(100, (result: any) => {
 			moveToNextPage();
-			// if (result) {
-			// 	console.log('Reward granted!');
-			// }
-			// else {
-			// 	console.log('Reward not granted!');
-			// }
 		});
 	};
 	return (

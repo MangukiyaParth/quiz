@@ -24,6 +24,10 @@ export const showRewardAd = (rewardCoins: any, callbackfun: any) => {
                     
                     const newCoins = coins + rewardCoins;
                     sessionStorage.setItem('localCoins', JSON.stringify({ coins: newCoins }));
+
+                    if(callbackfun){
+                        callbackfun();
+                    }
                 });
             } catch (error) {
                 console.error("Error during ad setup:", error);

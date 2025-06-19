@@ -25,8 +25,7 @@ export default function GeneralLayout({ children, title }: { children: React.Rea
 	}, []);
 
 	const manageDailyRewardBtn = () => {
-		showRewardAd(100, (result: any) => {
-		});
+		showRewardAd(100, (result: any) => {});
 	  };
 	return (
 		<div className="text-white h-screen flex overflow-hidden">

@@ -2,9 +2,10 @@
 
 import AdBanner from '@/components/AdBanner';
 import React, { useEffect, useState } from 'react';
-import Questions from './ui/questions';
-import GetRewardModal from './ui/GetRewardModal';
+import Questions from '@/app/ui/questions';
+import GetRewardModal from '@/app/ui/GetRewardModal';
 import { showRewardAd } from '@/lib/showReward';
+import DisplayAdModal from '@/app/ui/DisplayAdModal';
 
 export default function Home() {
 	const [currentQuestion, setCurrentQuestion] = useState<{
@@ -21,6 +22,7 @@ export default function Home() {
 	const [selectedAnswer , setSelectedAnswer ] = useState<number | null>(null);
 	const [correctAnswer , setCorrectAnswer ] = useState<number | null>(null);
 	const [showRewardPopup , setShowRewardPopup ] = useState(false);
+	const [showDisplayPopup , setShowDisplayPopup ] = useState(true);
 
     const questions = [
         {
@@ -59,8 +61,7 @@ export default function Home() {
 					sessionStorage.setItem('_u', 'true');
 					sessionStorage.setItem('localCoins', JSON.stringify(coinData));
 				}
-				showRewardAd(0, (result: any) => {
-				});
+				showRewardAd(0, (result: any) => {});
 				setShowRewardPopup(true);
 				return;
 			}
@@ -72,8 +73,9 @@ export default function Home() {
 
 	return (
 		<div className="px-5 pt-[4rem] pb-20 flex flex-col items-center w-full gap-6">
+			{ showDisplayPopup && <DisplayAdModal setPopup={setShowDisplayPopup} /> }
 			{ showRewardPopup && <GetRewardModal /> }
-			{ !showRewardPopup && 
+			{ !showRewardPopup && !showDisplayPopup &&
 				<>
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
 					<AdBanner slot_id="div-gpt-ad-123456789-0" size={[[300, 250]]} id="/23302694015/QD1" />
