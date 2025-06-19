@@ -17,11 +17,11 @@ const AdBanner = ({id, slot_id, size}: AdBannerProps) => {
 			// 	const oldSlot = googletag.pubads().getSlots().find((slot: any) => slot.getSlotElementId() === id);
 			// 	googletag.destroySlots([oldSlot]);
 			// }
-			const allSlots = googletag.pubads().getSlots();
-			// Destroy all slots if any exist
-			if (allSlots.length > 0) {
-				googletag.destroySlots(allSlots);
-			}
+			// const allSlots = googletag.pubads().getSlots();
+			// // Destroy all slots if any exist
+			// if (allSlots.length > 0) {
+			// 	googletag.destroySlots(allSlots);
+			// }
             googletag.defineSlot(id, size, slot_id).addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
