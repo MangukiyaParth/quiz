@@ -10,6 +10,7 @@ interface PageProps {
 	params: Promise<{ id: string }>;
 }
 
+export const runtime = 'edge';
 export default function Page({params} : PageProps) {
 	const router = useRouter();
 	

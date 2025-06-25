@@ -10,6 +10,7 @@ interface PageProps {
 	params: Promise<{ id: string }>;
 }
 
+export const runtime = 'edge';
 export default function Page({params} : PageProps) {
 	const { id } = use(params);
 	const selectedCategory = category.find((category) => encodeURI(category.name.replaceAll(" ", "_")) === id);
