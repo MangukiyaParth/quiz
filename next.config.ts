@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  swcMinify: true,
+  // output: 'standalone', // Optional: uncomment if you're doing custom deployment (not needed with next-on-pages)
 };
 
 export default nextConfig;
