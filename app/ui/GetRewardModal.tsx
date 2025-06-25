@@ -1,12 +1,18 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { showRewardAd } from '@/lib/showReward';
 
 export default function GetRewardModal() {
 	const router = useRouter();
+	const pathname = usePathname();
 	const moveToNextPage = () => {
 		// router.push('/playquiz');
-		router.push('/home');
+		if(pathname.includes('/en')){
+			router.push('/en/home');
+		}
+		else{
+			router.push('/home');
+		}
 	};
 	const claimCoin = async () => {
 		showRewardAd(100, (result: any) => {

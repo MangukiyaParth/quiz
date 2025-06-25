@@ -39,6 +39,7 @@ export default function Home() {
 
 	useEffect(() => {
 		setCurrentQuestion(questions[currentIndex]);
+		showRewardAd(0, (result: any) => {});
 	}, []);
 
     const handleAnswerClick = async (index: number) => {
@@ -76,7 +77,7 @@ export default function Home() {
 			{ showRewardPopup && <GetRewardModal /> }
 				<>
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
-					<AdBanner slot_id="div-gpt-ad-123456789-0" size={[[300, 250]]} id="/23302694015/QD1" />
+					<AdBanner slot_id="div-gpt-ad-123456789-en0" size={[[300, 250]]} id="/23302694015/QD1" />
 				</div>
 				<div className="text-center font-bold text-18">
 					<div className="flex gap-1 text-[12px] text-[#8789c3]">

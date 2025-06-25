@@ -16,21 +16,27 @@ export default function GeneralLayout({ children, title }: { children: React.Rea
 				setCoins(coinData ? coinData.coins : 0);
 
 				const storedData = sessionStorage.getItem('_u');
-				if(storedData == undefined && pathname != '/' && pathname != '/playquiz') {
-					router.push('/');
+				if(storedData == undefined && pathname != '/' && pathname != '/playquiz' && pathname != '/en' && pathname != '/en/playquiz') {
+					if(pathname.includes('/en')){
+						router.push('/en');
+					}
+					else{
+						router.push('/');
+					}
 				}
-				else if (storedData == 'true' && pathname == '/') {
-					router.push('/home');
+				else if (storedData == 'true' && (pathname == '/' || pathname == '/en')) {
+					if(pathname.includes('/en')){
+						router.push('/en/home');
+					}
+					else{
+						router.push('/home');
+					}
 				}
 			}
 		}
 
-		// Initial run
 		handleStorageChange();
-
-		// Listen for custom event
 		window.addEventListener('session-change', handleStorageChange);
-
 		return () => {
 			window.removeEventListener('session-change', handleStorageChange);
 		};

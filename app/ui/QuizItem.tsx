@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 interface QuizItemProps {
@@ -8,8 +8,17 @@ interface QuizItemProps {
 
 export default function QuizItem({quizData, catData}: QuizItemProps) {
     const router = useRouter();
+    const pathname = usePathname();
+    const goToQuiz = ()=>{
+        if(pathname.includes('/en')){
+            router.push('/en/quiz/'+encodeURI(quizData.name.replaceAll(" ","_")))
+        }
+        else{
+            router.push('/quiz/'+encodeURI(quizData.name.replaceAll(" ","_")))
+        }
+    }
     return (
-        <div className="w-full" key={quizData.id} onClick={() => router.push('/quiz/'+encodeURI(quizData.name.replaceAll(" ","_")))} >
+        <div className="w-full" key={quizData.id} onClick={goToQuiz} >
             <div className="flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer">
                 <div className="flex gap-2 items-center px-2 justify-between">
                     <div className="flex flex-col"><img className="object-cover w-24 rounded-full" src={catData.img} alt="CategoryImage" /></div>

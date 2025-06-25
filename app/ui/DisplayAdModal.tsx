@@ -1,6 +1,12 @@
 import AdBanner from '@/components/AdBanner';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 export default function DisplayAdModal({setPopup}: {setPopup: any}) {
+	const pathname = usePathname();
+	let adId = "div-gpt-ad-1234567890-0";
+	if(pathname.includes('/en')){
+		adId = "div-gpt-ad-1234567890-en0";
+	}
 	return (
 		<div className="fixed modal z-50 inset-0 flex items-center justify-center w-[100%]">
 			<div className="fixed inset-0 bg-gray-800 opacity-90"></div>
@@ -11,7 +17,7 @@ export default function DisplayAdModal({setPopup}: {setPopup: any}) {
 					</svg>
 				</button>
 				<div className="max-w-[480px] max-h-[320px] mobile-width">
-					<AdBanner slot_id="div-gpt-ad-1234567890-0" size={[[300, 250]]} id="/23302694015/QD9" />
+					<AdBanner slot_id={adId} size={[[300, 250]]} id="/23302694015/QD9" />
 				</div>
 			</div>
 		</div>

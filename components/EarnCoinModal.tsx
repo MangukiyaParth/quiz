@@ -1,13 +1,19 @@
 'use client';
 import { showRewardAd } from '@/lib/showReward';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 const EarnCoinModal = ({modalManageFunction, quizId}: {modalManageFunction: (value: boolean) => void; quizId: string}) => {
   const router = useRouter();
+  const pathname = usePathname();
   const manageWatchBtn = () => {
     showRewardAd(100, (result: any) => {
-      router.push('/quiz-play/' + quizId);
+      if(pathname.includes('/en')){
+        router.push('/en/quiz-play/' + quizId);
+      }
+      else{
+        router.push('/quiz-play/' + quizId);
+      }
     });
   };
   return (
